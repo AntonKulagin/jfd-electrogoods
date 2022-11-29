@@ -1,18 +1,16 @@
-const express = require('express')
-const Profession = require('../models/Computer')
-const router = express.Router({mergeParams: true})
+const express = require("express");
+const Computer = require("../models/Computer");
+const router = express.Router({ mergeParams: true });
 
-router.get('/', async (req, res )=> {
+router.get("/", async (req, res) => {
     try {
-        const list = await Profession.find()
-        res.status(200).send(list)
+        const list = await Computer.find();
+        res.status(200).send(list);
     } catch (e) {
         res.status(500).json({
-            message: 'На сервере произошла ошибка, попробуйте позже'
-        })
+            message: "На сервере произошла ошибка, попробуйте позже",
+        });
     }
-})
+});
 
-
-
-module.exports = router
+module.exports = router;

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Wrapper from "./components/common/wrapper";
 import SignInPage from "./components/pages/login/SignInPage/SignInPage";
 import SignUpPage from "./components/pages/login/SignUpPage/SignUpPage";
