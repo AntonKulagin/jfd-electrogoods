@@ -1,0 +1,23 @@
+.header {
+	background-color: #ccc;
+	&__body {
+		height: 70px;
+		padding: 5px 0px;
+		display: flex;
+		align-items: center;
+		@media (min-width: 768px) {
+			justify-content: space-between;
+		}
+	}
+	&__logo {
+		@media (max-width: 768px) {
+			flex: 1 1 auto;
+		}
+	}
+	&__menu {
+		display: flex;
+		gap: 15px;
+	}
+	&__items {
+	}
+}

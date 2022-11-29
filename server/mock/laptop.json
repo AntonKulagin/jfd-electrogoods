@@ -1,0 +1,32 @@
+[
+  {
+    "name": "17.3\" Ноутбук MSI GF76 Katana 11UE-269XRU черный",
+    "image": "https://idedal.ru/images/notebook.png",
+    "processor": "Intel Core i7-11800H",
+    "price": 94799
+  },
+  {
+    "name": "17.3\" Ноутбук MSI GF76 Katana 11SC-483XRU черный [Full HD (1920x1080)",
+    "image": "https://static.tildacdn.com/tild6233-3937-4239-a638-393236393933/laptope_004_2.png",
+    "processor": "Intel Core i5-11400H",
+    "price": 63499
+  },
+  {
+    "name": "15.6\" Ноутбук GIGABYTE G5 GE черный [Full HD (1920x1080)",
+    "image": "https://img2.freepng.ru/20180330/keq/kisspng-laptop-dell-asus-computer-monitors-central-process-laptops-5abe545cad7ef0.2756689015224228767107.jpg",
+    "processor": "Intel Core i5-12500H",
+    "price": 67199
+  },
+  {
+    "name": "15.6\" Ноутбук MSI GF66 Katana 12UE-868XRU черный [Full HD (1920x1080)",
+    "image": "https://www.freeiconspng.com/uploads/laptop-icon-19.jpg",
+    "processor": "Intel Core i5-12500H",
+    "price": 87399
+  },
+  {
+    "name": "17.3\" Ноутбук MSI GF76 Katana 12UD-237XRU черный [Full HD (1920x1080)",
+    "image": "https://www.xbook.ru/upload/resize_cache/iblock/d70/1200_1200_140cd750bba9870f18aada2478b24840a/1a1g.jpg",
+    "processor": "Intel Core i5-12500H",
+    "price": 82799
+  }
+]
