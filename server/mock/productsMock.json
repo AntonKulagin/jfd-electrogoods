@@ -1,0 +1,72 @@
+[
+	{
+		"name": "ПК DEXP Atlas H341",
+		"image": "https://img.tehnomaks.ru/img/prod/full/16058521942.jpg",
+		"processor": "Intel Celeron N4020, 2x1.1 ГГц",
+		"price": 10000,
+		"type": "computer"
+	},
+	{
+		"name": "ПК DEXP Aquilon O272",
+		"image": "https://express-china.ru/upload/iblock/420/4200b9e40b2206fa1e8546a7fb2871c1.jpg",
+		"processor": "Intel Celeron N4120, 4x1.1 ГГц",
+		"price": 11800,
+		"type": "computer"
+	},
+	{
+		"name": "ПК Acer Aspire XC-830 [DT.BE8ER.003]",
+		"image": "https://ilab24.ru/img/service-pc.png",
+		"processor": "Intel Celeron J4025, 2x2 ГГц",
+		"price": 22300,
+		"type": "computer"
+	},
+	{
+		"name": "ПК Acer Veriton S2680G [DT.VV2ER.007]",
+		"image": "https://shkola5malgobek-r26.gosweb.gosuslugi.ru/netcat_files/56/746/equipment.webp",
+		"processor": "Intel Pentium Gold G6405, 2x4.1 ГГц",
+		"price": 26999,
+		"type": "computer"
+	},
+	{
+		"name": "ПК MSI PRO DP21 11MA-210RU [9S6-B0A411-210]",
+		"image": "https://avatars.dzeninfra.ru/get-zen_doc/1875939/pub_5d0ba322b34feb00af5ddb26_5d0baae62d23ae00af68c06b/scale_1200",
+		"processor": "Intel Pentium Gold G6405, 2x4.1 ГГц",
+		"price": 26999,
+		"type": "computer"
+	},
+	{
+		"name": "17.3\" Ноутбук MSI GF76 Katana 11UE-269XRU черный",
+		"image": "https://idedal.ru/images/notebook.png",
+		"processor": "Intel Core i7-11800H",
+		"price": 94799,
+		"type": "laptop"
+	},
+	{
+		"name": "17.3\" Ноутбук MSI GF76 Katana 11SC-483XRU черный [Full HD (1920x1080)",
+		"image": "https://static.tildacdn.com/tild6233-3937-4239-a638-393236393933/laptope_004_2.png",
+		"processor": "Intel Core i5-11400H",
+		"price": 63499,
+		"type": "laptop"
+	},
+	{
+		"name": "15.6\" Ноутбук GIGABYTE G5 GE черный [Full HD (1920x1080)",
+		"image": "https://img2.freepng.ru/20180330/keq/kisspng-laptop-dell-asus-computer-monitors-central-process-laptops-5abe545cad7ef0.2756689015224228767107.jpg",
+		"processor": "Intel Core i5-12500H",
+		"price": 67199,
+		"type": "laptop"
+	},
+	{
+		"name": "15.6\" Ноутбук MSI GF66 Katana 12UE-868XRU черный [Full HD (1920x1080)",
+		"image": "https://www.freeiconspng.com/uploads/laptop-icon-19.jpg",
+		"processor": "Intel Core i5-12500H",
+		"price": 87399,
+		"type": "laptop"
+	},
+	{
+		"name": "17.3\" Ноутбук MSI GF76 Katana 12UD-237XRU черный [Full HD (1920x1080)",
+		"image": "https://www.xbook.ru/upload/resize_cache/iblock/d70/1200_1200_140cd750bba9870f18aada2478b24840a/1a1g.jpg",
+		"processor": "Intel Core i5-12500H",
+		"price": 82799,
+		"type": "laptop"
+	}
+]

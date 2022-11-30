@@ -1,17 +1,11 @@
-const Computer = require("../models/Computer");
-const Laptop = require("../models/Latop");
+const Product = require("../models/Product");
 
-const computersMock = require("../mock/computers.json");
-const laptopsMock = require("../mock/laptop.json");
+const productsMock = require("../mock/productsMock.json");
 
 module.exports = async () => {
-    const computers = await Computer.find();
-    if (computers.length !== computersMock.length) {
-        await createInitialEntity(Computer, computersMock);
-    }
-    const laptops = await Laptop.find();
-    if (laptops.length !== laptopsMock.length) {
-        await createInitialEntity(Laptop, laptopsMock);
+    const products = await Product.find();
+    if (products.length !== productsMock.length) {
+        await createInitialEntity(Product, productsMock);
     }
 };
 
