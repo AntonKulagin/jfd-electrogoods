@@ -1,3 +1,57 @@
 .goods {
-	background-color: rgb(189, 255, 145);
+	margin: 20px 0px;
+	&__search {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 15px;
+		margin-bottom: 20px;
+		&_left {
+			box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+			border-radius: 5px;
+		}
+		&_right {
+			box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+		}
+	}
+	&__bottom {
+		display: grid;
+		grid-template-columns: 0.4fr 2fr;
+		gap: 15px;
+	}
+	&__sidebar {
+		box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+	}
+	&__products {
+	}
+	&__content {
+	}
+	&__cards {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 15px;
+		@media (max-width: 960px) {
+			grid-template-columns: repeat(3, 1fr);
+		}
+		@media (max-width: 700px) {
+			grid-template-columns: repeat(2, 1fr);
+		}
+		@media (max-width: 500px) {
+			grid-template-columns: repeat(1, 1fr);
+		}
+	}
+	&__item {
+		display: grid;
+		grid-template-rows: 1fr auto;
+		box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+		padding: 10px;
+		width: 100%;
+		border-radius: 10px;
+		overflow: hidden;
+		transition: all 0.3s ease 0s;
+		@media (any-hover: hover) {
+			&:hover {
+				box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+			}
+		}
+	}
 }

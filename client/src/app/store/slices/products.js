@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import computersService from "../../services/computers.service";
+import productsService from "../../services/products.service";
 
 const initialState = {
     entities: null,
@@ -7,8 +7,8 @@ const initialState = {
     error: null,
 };
 
-const computersSlice = createSlice({
-    name: "computers",
+const productsSlice = createSlice({
+    name: "products",
     initialState,
     reducers: {
         requested(state) {
@@ -25,20 +25,21 @@ const computersSlice = createSlice({
     },
 });
 
-const { reducer: computersReducer, actions } = computersSlice;
+const { reducer: productsReducer, actions } = productsSlice;
 const { requested, requestFailed, received } = actions;
 
-export const loadComputers = () => async (dispatch) => {
+export const loadProductsList = () => async (dispatch) => {
     dispatch(requested());
     try {
-        const { content } = await computersService.fetchAll();
+        const { content } = await productsService.fetchAll();
         dispatch(received(content));
     } catch (error) {
         dispatch(requestFailed(error.message));
     }
 };
 
-export const getAllComputers = () => (state) => state.computers.entities;
-export const getComputersLoading = () => (state) => state.computers.isLoading;
+export const getAllProducts = () => (state) => state.products.entities;
+export const getProductById = (id) => (state) => state.products.entities.find((prod) => prod._id === id);
+export const getProductsLoading = () => (state) => state.products.isLoading;
 
-export default computersReducer;
+export default productsReducer;

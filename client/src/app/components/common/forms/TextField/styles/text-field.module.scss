@@ -7,8 +7,8 @@
 		padding: 0 10px;
 		top: 0;
 		left: 0;
-		font-size: 20px;
-		transform: translate(10px, 30%);
+		font-size: 18px;
+		transform: translate(10px, 45%);
 		transition: all 0.3s ease 0s;
 		opacity: 0.4;
 		cursor: text;
@@ -18,8 +18,7 @@
 		position: relative;
 		width: 100%;
 		background-color: transparent;
-		border: 1px solid rgb(114, 114, 114);
-		border-radius: 5px;
+		box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 		font-size: 20px;
 		padding: 5px 10px;
 		cursor: text;

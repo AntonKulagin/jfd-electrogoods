@@ -14,6 +14,7 @@ async function createInitialEntity(Model, data) {
     return Promise.all(
         data.map(async (item) => {
             try {
+                delete item._id;
                 const newItem = new Model(item);
                 await newItem.save();
                 return newItem;

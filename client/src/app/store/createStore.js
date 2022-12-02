@@ -1,8 +1,8 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import computersReducer from "./slices/computers";
+import productsReducer from "./slices/products";
 
 const rootReducer = combineReducers({
-    computers: computersReducer,
+    products: productsReducer,
 });
 
 export function createStore() {
