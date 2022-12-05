@@ -12,19 +12,25 @@ const SignInPage = () => {
             <div className={styles.login__content}>
                 <div className={styles.login__left}>
                     <div className={styles.left}>
-                        <div className={styles.left__logo}>{/* <Logo /> */}</div>
-                        <div className={styles.left__title}>Заходите в ваш любимый магазин!</div>
+                        <div className={styles.left__logo}>
+                            {/* <Logo /> */}
+                        </div>
+                        <div className={styles.left__title}>
+                            Заходите в ваш любимый магазин!
+                        </div>
                         <div className={styles.left__text}>Оцените новинки</div>
                         <div className={styles.left__card}>
-                            «Цели никогда не должны быть простыми. Они должны быть неудобными, чтобы заставить вас
-                            работать» — Майкл Фелпс
+                            «Цели никогда не должны быть простыми. Они должны
+                            быть неудобными, чтобы заставить вас работать» —
+                            Майкл Фелпс
                         </div>
                     </div>
                 </div>
                 <div className={styles.right}>
                     <div className={styles.right__title}>Вход</div>
                     <p className={styles.right__pretitle}>
-                        Еще нет аккаунта? <Link to="/login/signup">Создать аккаунт</Link>
+                        Еще нет аккаунта?{" "}
+                        <Link to="/login/signup">Создать аккаунт</Link>
                     </p>
                     <SignInForm />
                 </div>

@@ -1,12 +1,14 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAction, createSlice } from "@reduxjs/toolkit";
 import authService from "../../services/auth.service";
 import localStorageService from "../../services/localStorage.service";
 import usersService from "../../services/users.service";
-import { generateAuthError } from "../../utils/generateAuthError";
+import { cartLogOut } from "./cart";
+// import { generateAuthError } from "../../utils/generateAuthError";
 
 const initialState = localStorageService.getAccessToken()
     ? {
           entities: null,
+          currentUser: null,
           userId: localStorageService.getLocalId(),
           isLoggedIn: true,
           signUpError: null,
@@ -15,6 +17,7 @@ const initialState = localStorageService.getAccessToken()
       }
     : {
           entities: null,
+          currentUser: null,
           userId: null,
           isLoggedIn: false,
           signUpError: null,
@@ -40,6 +43,7 @@ const authSlice = createSlice({
         authRequestSuccess(state, action) {
             state.userId = action.payload;
             state.isLoggedIn = true;
+            state.isLoading = false;
         },
         authSignUpRequestFailed(state, action) {
             state.signUpError = action.payload;
@@ -52,10 +56,18 @@ const authSlice = createSlice({
                 state.entities = [];
             }
             state.entities.push(action.payload);
+            state.isLoading = false;
         },
         userLoggedOut(state) {
             state.isLoggedIn = false;
             state.userId = null;
+        },
+        currentUserRequested(state) {
+            state.isLoading = true;
+        },
+        currentUserReceived(state, action) {
+            state.currentUser = action.payload;
+            state.isLoading = false;
         }
     }
 });
@@ -63,28 +75,43 @@ const authSlice = createSlice({
 const { reducer: authReducer, actions } = authSlice;
 const {
     usersRequested,
-    usersReceived,
-    usersRequestFailed,
+    //  usersReceived,
+    //  usersRequestFailed,
     authRequestSuccess,
     authSignUpRequestFailed,
     authSignInRequestFailed,
     userCreated,
-    userLoggedOut
+    userLoggedOut,
+    //  currentUserRequested,
+    currentUserReceived
 } = actions;
 
-export const loadUsers = () => async (dispatch) => {
+const createUserFailed = createAction("auth/createUserFailed");
+
+// export const loadUsers = () => async (dispatch) => {
+//     dispatch(usersRequested());
+//     try {
+//         const { content } = await usersService.fetchAll();
+//         dispatch(usersReceived(content));
+//     } catch (error) {
+//         dispatch(usersRequestFailed(error.message));
+//     }
+// };
+
+export const loadCurrentUser = () => async (dispatch) => {
     dispatch(usersRequested());
     try {
-        const { content } = await usersService.fetchAll();
-        dispatch(usersReceived(content));
+        dispatch(getUser());
     } catch (error) {
-        dispatch(usersRequestFailed(error.message));
+        dispatch(authSignUpRequestFailed(error.message));
     }
 };
 
 export const signUp = (data, redirect) => async (dispatch) => {
+    dispatch(usersRequested());
     try {
-        const content = await authService.signUp(data);
+        const content = await authService.register(data);
+        localStorageService.setTokens(content);
         dispatch(authRequestSuccess(content.localId));
         const newUser = {
             id: content.localId,
@@ -98,59 +125,81 @@ export const signUp = (data, redirect) => async (dispatch) => {
                 .substring(7)}.svg`
         };
         dispatch(createUser(newUser));
+        dispatch(getUser());
         redirect("/", { replace: true });
     } catch (error) {
-        const errorMessage = errorCatcher(error);
-        dispatch(authSignUpRequestFailed(errorMessage));
+        dispatch(authSignUpRequestFailed(error.message));
     }
 };
 
 export const signIn = (data, redirect) => async (dispatch) => {
+    dispatch(usersRequested());
     try {
-        const content = await authService.signIn(data);
+        const content = await authService.login(data);
         localStorageService.setTokens(content);
         dispatch(authRequestSuccess(content.localId));
+        dispatch(getUser());
         redirect("/", { replace: true });
     } catch (error) {
-        const errorMessage = errorCatcher(error);
-        dispatch(authSignInRequestFailed(errorMessage));
+        dispatch(authSignInRequestFailed(error.message));
     }
 };
+
+function getUser() {
+    return async function (dispatch) {
+        dispatch(usersRequested());
+        try {
+            const { content } = await usersService.getCurrentUser();
+            dispatch(currentUserReceived(content));
+        } catch (error) {
+            dispatch(createUserFailed(error.message));
+        }
+    };
+}
 
 export const logout = () => (dispatch) => {
     localStorageService.removeUserData();
     dispatch(userLoggedOut());
+    dispatch(cartLogOut());
 };
 
-const errorCatcher = (error) => {
-    let errorMessage;
-    const { code, message } = error.response.data.error;
-    if (code === 400) {
-        errorMessage = generateAuthError(message);
-    } else {
-        errorMessage = error.message;
-    }
-    return errorMessage;
-};
+// const errorCatcher = (error) => {
+//     let errorMessage;
+//     console.log(error.response);
+//     const { code, message } = error?.response?.data?.error;
+//     if (code === 400) {
+//         errorMessage = generateAuthError(message);
+//     } else {
+//         errorMessage = error.message;
+//     }
+//     return errorMessage;
+// };
 
 function createUser(data) {
     return async function (dispatch) {
-        const { content } = await usersService.createUser(data.id, data);
-        dispatch(userCreated(content));
-        return content;
+        dispatch(usersRequested());
+        try {
+            const { content } = await usersService.create(data);
+            dispatch(userCreated(content));
+        } catch (error) {
+            dispatch(createUserFailed(error.message));
+        }
     };
 }
 
-export const getCurrentUser = () => (state) => {
-    return state.auth.entities
-        ? state.auth.entities.find((user) => user.id === state.auth.userId)
-        : null;
-};
+// export const getCurrentUser = () => (state) => {
+//     return state.auth.entities
+//         ? state.auth.entities.find((user) => user.id === state.auth.userId)
+//         : null;
+// };
 export const getAuthUserId = () => (state) => state.auth.userId;
 
 export const getUserById = (id) => (state) => {
     return state.auth.entities.find((user) => user.id === id);
 };
+
+export const getCurrenrUserId = () => (state) => state.auth.userId;
+export const getCurrentUserData = () => (state) => state.auth.currentUser;
 
 export const getAuthSignUpError = () => (state) => state.auth.signUpError;
 export const getAuthSignInError = () => (state) => state.auth.signInError;

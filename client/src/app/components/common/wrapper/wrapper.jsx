@@ -6,7 +6,10 @@ const Wrapper = ({ children }) => {
     return <div className={styles.wrapper}>{children}</div>;
 };
 Wrapper.propTypes = {
-    children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node
+    ])
 };
 
 export default Wrapper;

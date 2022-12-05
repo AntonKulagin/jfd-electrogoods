@@ -1,19 +1,19 @@
 .footer {
-	background-color: #aaa;
-	position: relative;
-	z-index: 50;
-	&__body {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		height: 30px;
-		color: #fff;
-	}
-	&__button {
-		@media (any-hover: hover) {
-			&:hover {
-				color: red;
-			}
-		}
-	}
+    background-color: #aaa;
+    position: relative;
+    z-index: 50;
+    &__body {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 30px;
+        color: #fff;
+    }
+    &__button {
+        @media (any-hover: hover) {
+            &:hover {
+                color: red;
+            }
+        }
+    }
 }

@@ -1,0 +1,45 @@
+%tempateModal {
+	position: fixed;
+	z-index: 50;
+	pointer-events: none;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.3);
+	opacity: 0;
+	transition: all 0.5s ease 0s;
+	overflow: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+%templateBody {
+	margin: 20px 0;
+	padding: 15px;
+	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
+	background-color: #fff;
+	opacity: 0;
+	transform: scale(0.95);
+	transition: all 1s ease 0s;
+}
+
+.modal {
+	@extend %tempateModal;
+	&__active {
+		@extend %tempateModal;
+		pointer-events: auto;
+		opacity: 1;
+		backdrop-filter: blur(2px);
+	}
+	&__body {
+		@extend %templateBody;
+		&_active {
+			@extend %templateBody;
+			transform: scale(1);
+			opacity: 1;
+		}
+	}
+}

@@ -3,7 +3,16 @@ import PropTypes from "prop-types";
 import passwordIcon from "../../../../assets/icons/showPassword.png";
 import styles from "./styles/text-field.module.scss";
 
-const TextField = ({ label, type, name, value, onChange, error, placeholder, ...rest }) => {
+const TextField = ({
+    label,
+    type,
+    name,
+    value,
+    onChange,
+    error,
+    placeholder,
+    ...rest
+}) => {
     const [showPassword, setShowPassword] = useState(false);
 
     const handleChange = ({ target }) => {
@@ -35,7 +44,11 @@ const TextField = ({ label, type, name, value, onChange, error, placeholder, ...
                 <p>{label}</p>
             </label>
             {type === "password" && (
-                <button className={getPassButtonClasses()} type="button" onClick={toggleShowPassword}>
+                <button
+                    className={getPassButtonClasses()}
+                    type="button"
+                    onClick={toggleShowPassword}
+                >
                     <img src={passwordIcon} alt="icon" />
                 </button>
             )}
@@ -44,7 +57,7 @@ const TextField = ({ label, type, name, value, onChange, error, placeholder, ...
     );
 };
 TextField.defaultProps = {
-    type: "text",
+    type: "text"
 };
 TextField.propTypes = {
     label: PropTypes.string,
@@ -53,7 +66,7 @@ TextField.propTypes = {
     value: PropTypes.string,
     onChange: PropTypes.func,
     error: PropTypes.string,
-    placeholder: PropTypes.string,
+    placeholder: PropTypes.string
 };
 
 export default React.memo(TextField);

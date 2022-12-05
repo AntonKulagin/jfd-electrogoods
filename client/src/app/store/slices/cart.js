@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import cartService from "../../services/cart.service";
+import { nanoid } from "nanoid";
 
 const initialState = {
-    entities: null,
+    entities: [],
     isLoading: true,
-    error: null,
+    error: null
 };
 
 const cartSlice = createSlice({
@@ -19,8 +20,6 @@ const cartSlice = createSlice({
             state.isLoading = false;
         },
         cartReceived: (state, action) => {
-            console.log("cart action", action);
-
             state.entities = action.payload;
             state.isLoading = false;
         },
@@ -29,51 +28,70 @@ const cartSlice = createSlice({
             state.isLoading = false;
         },
         cartRemoved: (state, action) => {
-            state.entities = state.entities.filter((c) => c._id !== action.payload);
+            state.entities = state.entities.filter(
+                (c) => c._id !== action.payload
+            );
             state.isLoading = false;
         },
-    },
+        cartAllDeleted: (state) => {
+            state.entities = [];
+            state.isLoading = false;
+        }
+    }
 });
 
 const { reducer: cartReducer, actions } = cartSlice;
-const { cartRequested, cartRequestFailed, cartReceived, cartAddReceived, cartRemoved } = actions;
+const {
+    cartRequested,
+    cartRequestFailed,
+    cartReceived,
+    cartAddReceived,
+    cartRemoved,
+    cartAllDeleted
+} = actions;
 
-export const loadCartList = () => async (dispatch) => {
+export const loadCartList = (userId) => async (dispatch) => {
     dispatch(cartRequested());
     try {
-        const { content } = await cartService.fetchAll();
-
-        console.log("content", content);
-
+        const { content } = await cartService.get(userId);
         dispatch(cartReceived(content));
     } catch (error) {
         dispatch(cartRequestFailed(error.message));
     }
 };
 
-export const addProduct = (productId) => async (dispatch) => {
+export const addProduct = (data) => async (dispatch) => {
     dispatch(cartRequested());
     try {
-        const { content } = await cartService.add(productId);
+        const { content } = await cartService.add({ _id: nanoid(), ...data });
         dispatch(cartAddReceived(content));
     } catch (error) {
         dispatch(cartRequestFailed(error.message));
     }
 };
 
-export const removeProduct = (productId) => async (dispatch) => {
+export const removeProduct = (cartId) => async (dispatch) => {
     dispatch(cartRequested());
     try {
-        const { content } = await cartService.delete(productId);
+        const content = await cartService.remove(cartId);
         if (content === null) {
-            dispatch(cartRemoved(productId));
+            dispatch(cartRemoved(cartId));
         }
     } catch (error) {
         dispatch(cartRequestFailed(error.message));
     }
 };
 
+export const cartLogOut = () => (dispatch) => {
+    dispatch(cartRequested());
+    try {
+        dispatch(cartAllDeleted());
+    } catch (error) {
+        dispatch(cartRequestFailed(error.message));
+    }
+};
+
 export const getCart = () => (state) => state.cart.entities;
-// export const getCartLoading = () => (state) => state.cart.isLoading;
+export const getCartLoading = () => (state) => state.cart.isLoading;
 
 export default cartReducer;

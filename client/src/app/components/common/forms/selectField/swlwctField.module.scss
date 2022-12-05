@@ -1,0 +1,27 @@
+.select {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	&__content {
+		width: 100%;
+		font-size: 16px;
+	}
+	&__sortOrder_top {
+		width: 0;
+		height: 0;
+		border-left: 10px solid transparent;
+		border-right: 10px solid transparent;
+		border-bottom: 15px solid rgb(18, 22, 255);
+		transition: all 0.3s ease 0s;
+		transform: translateY(-1px);
+	}
+	&__sortOrder_bottom {
+		width: 0;
+		height: 0;
+		border-left: 10px solid transparent;
+		border-right: 10px solid transparent;
+		border-top: 15px solid rgb(18, 22, 255);
+		transition: all 0.3s ease 0s;
+		transform: translateY(3px);
+	}
+}

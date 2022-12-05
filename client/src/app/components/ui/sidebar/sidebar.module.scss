@@ -1,0 +1,36 @@
+.sidebar {
+	&__body {
+	}
+	&__list {
+		display: flex;
+		flex-wrap: wrap;
+		column-gap: 20px;
+		@media (min-width: 600px) {
+			flex-direction: column;
+		}
+	}
+	&__item {
+		font-size: 18px;
+		&:not(:last-child) {
+			margin-bottom: 10px;
+		}
+	}
+	&__button {
+		&_comp {
+			font-weight: 600;
+			@media (any-hover: hover) {
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+		}
+		&_lap {
+			font-weight: 600;
+			@media (any-hover: hover) {
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+		}
+	}
+}

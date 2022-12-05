@@ -12,12 +12,19 @@ const SignUpPage = () => {
             <div className={styles.login__content}>
                 <div className={styles.login__left}>
                     <div className={styles.left}>
-                        <div className={styles.left__logo}>{/* <Logo /> */}</div>
-                        <div className={styles.left__title}>Рады приветствовать вас в нашем магазине!</div>
-                        <div className={styles.left__text}>Только лучшее качество и лучшие бренды</div>
+                        <div className={styles.left__logo}>
+                            {/* <Logo /> */}
+                        </div>
+                        <div className={styles.left__title}>
+                            Рады приветствовать вас в нашем магазине!
+                        </div>
+                        <div className={styles.left__text}>
+                            Только лучшее качество и лучшие бренды
+                        </div>
                         <div className={styles.left__card}>
-                            «Необходим новый тип мышления, если человечество хочет выжить и продвигаться в развитии» —
-                            Альберт Энштейн.
+                            «Необходим новый тип мышления, если человечество
+                            хочет выжить и продвигаться в развитии» — Альберт
+                            Энштейн.
                         </div>
                     </div>
                 </div>

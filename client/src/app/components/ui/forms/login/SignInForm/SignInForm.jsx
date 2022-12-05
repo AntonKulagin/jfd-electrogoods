@@ -2,32 +2,32 @@ import React from "react";
 import useForm from "../../../../../hooks/useForm";
 import styles from "../styles/login-form.module.scss";
 import { validatorConfig } from "./validatorConfig";
-// import { useDispatch, useSelector } from "react-redux";
-// import { getAuthSignInError, signIn } from "../../../../../store/slices/auth";
-// import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getAuthSignInError, signIn } from "../../../../../store/slices/auth";
+import { useNavigate } from "react-router-dom";
 import TextField from "../../../../common/forms/TextField";
 import Button from "../../../../common/Button";
 
 const SignInForm = () => {
-    //  const dispatch = useDispatch();
-    //  const navigate = useNavigate();
-    const { data, handleChange, errors } = useForm(
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { data, handleChange, validateBySubmit, errors } = useForm(
         {
             email: "",
-            password: "",
+            password: ""
         },
         validatorConfig
     );
 
-    //  const authError = useSelector(getAuthSignInError());
-    const authError = false;
+    const authError = useSelector(getAuthSignInError());
 
     const isValid = Object.keys(errors).length === 0;
     const handleSubmit = (e) => {
         e.preventDefault();
+        validateBySubmit();
         if (isValid) {
-            console.log(data);
-            // dispatch(signIn(data, navigate));
+            // console.log("sign in form", data);
+            dispatch(signIn(data, navigate));
         }
     };
     return (

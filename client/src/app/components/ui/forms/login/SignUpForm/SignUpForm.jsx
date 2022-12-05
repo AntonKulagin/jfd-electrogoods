@@ -1,35 +1,34 @@
 import React from "react";
 import styles from "../styles/login-form.module.scss";
 import { validatorConfig } from "./validatorConfig";
-// import { getAuthSignUpError, signUp } from "../../../../../store/slices/auth";
-// import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "../../../../common/Button";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useForm from "../../../../../hooks/useForm";
 import TextField from "../../../../common/forms/TextField";
+import { getAuthSignUpError, signUp } from "../../../../../store/slices/auth";
 
 const SignUpForm = () => {
-    //  const dispatch = useDispatch();
-    //  const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { handleChange, data, validateBySubmit, errors } = useForm(
         {
             name: "",
             email: "",
-            password: "",
+            password: ""
         },
         validatorConfig
     );
 
-    //  const authError = useSelector(getAuthSignUpError());
-    const authError = false;
+    const authError = useSelector(getAuthSignUpError());
 
     const isValid = Object.keys(errors).length === 0;
     const handleSubmit = (e) => {
         e.preventDefault();
         validateBySubmit();
         if (isValid) {
-            console.log(data);
-            //   dispatch(signUp(data, navigate));
+            // console.log("signUp Form", data);
+            dispatch(signUp(data, navigate));
         }
     };
     return (

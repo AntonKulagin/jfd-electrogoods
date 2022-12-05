@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./productCard.module.scss";
 import icon from "../../../assets/icons/new.png";
+import PropTypes from "prop-types";
 
 const ProductCard = ({ product }) => {
     return (
@@ -11,8 +12,12 @@ const ProductCard = ({ product }) => {
             <div className={styles.card__name}>{product.name}</div>
             <div className={styles.card__info}>{product.info}</div>
             <div className={styles.card__price}>
-                <div className={styles.card__price_currentPrice}>{product.price} руб.</div>
-                <div className={styles.card__price_oldPrice}>{product.oldPrice} руб.</div>
+                <div className={styles.card__price_currentPrice}>
+                    {product.price} руб.
+                </div>
+                <div className={styles.card__price_oldPrice}>
+                    {product.oldPrice} руб.
+                </div>
             </div>
             {product.new && (
                 <div className={styles.card__icon}>
@@ -21,6 +26,9 @@ const ProductCard = ({ product }) => {
             )}
         </div>
     );
+};
+ProductCard.propTypes = {
+    product: PropTypes.object
 };
 
 export default ProductCard;

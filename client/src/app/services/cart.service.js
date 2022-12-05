@@ -3,18 +3,32 @@ import httpService from "./http.service";
 const cartEndPoint = "cart/";
 
 const cartService = {
-    fetchAll: async () => {
-        const { data } = await httpService.get(cartEndPoint);
+    get: async (userId) => {
+        const params = {
+            orderBy: '"currentUserId"',
+            equalTo: `"${userId}"`
+        };
+        const { data } = await httpService.get(cartEndPoint, { params });
         return data;
     },
-    add: async (id) => {
-        const { data } = await httpService.post(cartEndPoint + id);
+    add: async (payload) => {
+        const { data } = await httpService.put(
+            cartEndPoint + payload._id,
+            payload
+        );
         return data;
     },
-    delete: async (id) => {
-        const { data } = await httpService.delete(cartEndPoint + id);
+    remove: async (cartId) => {
+        const { data } = await httpService.delete(cartEndPoint + cartId);
         return data;
     },
+    create: async (payload) => {
+        const { data } = await httpService.put(
+            cartEndPoint + payload._id,
+            payload
+        );
+        return data;
+    }
 };
 
 export default cartService;

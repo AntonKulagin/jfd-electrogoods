@@ -1,16 +1,24 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getProductById } from "../../../store/slices/products";
 import Button from "../../common/Button/Button";
 import Container from "../../common/container/container";
 import styles from "./productInfoPage.module.scss";
 import icon from "../../../assets/icons/new.png";
+import { getCurrenrUserId } from "../../../store/slices/auth";
+import { addProduct } from "../../../store/slices/cart";
 
 const ProductInfoPage = () => {
+    const dispatch = useDispatch();
     const { productId } = useParams();
+    const currentUserId = useSelector(getCurrenrUserId());
 
     const product = useSelector(getProductById(productId));
+
+    const handleClick = (productId) => {
+        dispatch(addProduct({ productId, currentUserId }));
+    };
 
     return (
         <div className={styles.productInfo}>
@@ -28,12 +36,28 @@ const ProductInfoPage = () => {
                     </div>
                     <div className={styles.productInfo__right}>
                         <div className={styles.content}>
-                            <div className={styles.content__name}>{product.name}</div>
-                            <div className={styles.content__info}>{product.info}</div>
+                            <div className={styles.content__name}>
+                                {product.name}
+                            </div>
+                            <div className={styles.content__info}>
+                                {product.info}
+                            </div>
                             <div className={styles.content__price}>
-                                <div className={styles.content__price_currentPrice}>{product.price} руб.</div>
-                                <div className={styles.content__price_oldPrice}>{product.oldPrice} руб.</div>
-                                <Button onClick={() => console.log("Click")}>В корзину</Button>
+                                <div
+                                    className={
+                                        styles.content__price_currentPrice
+                                    }
+                                >
+                                    {product.price} руб.
+                                </div>
+                                <div className={styles.content__price_oldPrice}>
+                                    {product.oldPrice} руб.
+                                </div>
+                                <Button
+                                    onClick={() => handleClick(product._id)}
+                                >
+                                    В корзину
+                                </Button>
                             </div>
                         </div>
                     </div>

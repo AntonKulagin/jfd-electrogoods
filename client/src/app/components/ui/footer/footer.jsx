@@ -16,7 +16,10 @@ const Footer = () => {
             <Container>
                 <div className={styles.footer__body}>
                     <div>Footer</div>
-                    <button onClick={handleClick} className={styles.footer__button}>
+                    <button
+                        onClick={handleClick}
+                        className={styles.footer__button}
+                    >
                         Init FireBase
                     </button>
                 </div>

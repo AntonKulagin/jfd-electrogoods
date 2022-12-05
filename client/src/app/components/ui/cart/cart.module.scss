@@ -1,3 +1,49 @@
 .cart {
-	background-color: rgb(240, 255, 155);
+	margin: 20px 0px;
+	&__body {
+		box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+		padding: 40px;
+		margin-bottom: 25px;
+		@media (max-width: 767.98px) {
+			padding: 20px;
+		}
+	}
+	&__empty {
+		text-align: center;
+		letter-spacing: 3px;
+		margin: 30px 0;
+	}
+	&__content {
+		display: grid;
+		grid-template-rows: auto;
+	}
+	&__order {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+	&__sum {
+		font-size: 25px;
+		font-weight: 600;
+		span {
+			font-size: 30px;
+		}
+	}
+
+	&__buttonOrder {
+		background-color: #fff;
+	}
+	&__modal {
+		&_sory {
+			text-align: center;
+			font-size: 30px;
+			font-weight: 600;
+			letter-spacing: 4px;
+			margin-bottom: 15px;
+		}
+		&_text {
+			text-align: center;
+			font-size: 18px;
+		}
+	}
 }

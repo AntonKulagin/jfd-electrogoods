@@ -4,7 +4,7 @@ import productsService from "../../services/products.service";
 const initialState = {
     entities: null,
     isLoading: true,
-    error: null,
+    error: null
 };
 
 const productsSlice = createSlice({
@@ -21,8 +21,8 @@ const productsSlice = createSlice({
         received(state, action) {
             state.entities = action.payload;
             state.isLoading = false;
-        },
-    },
+        }
+    }
 });
 
 const { reducer: productsReducer, actions } = productsSlice;
@@ -39,7 +39,24 @@ export const loadProductsList = () => async (dispatch) => {
 };
 
 export const getAllProducts = () => (state) => state.products.entities;
-export const getProductById = (id) => (state) => state.products.entities.find((prod) => prod._id === id);
+export const getProductById = (id) => (state) =>
+    state.products.entities.find((prod) => prod._id === id);
 export const getProductsLoading = () => (state) => state.products.isLoading;
+
+export const getProductsList = (cart) => (state) => {
+    if (state.products.entities) {
+        const productsArray = [];
+        for (const itemCart of cart) {
+            for (const prod of state.products.entities) {
+                if (prod._id === itemCart.productId) {
+                    productsArray.push({ ...prod, cartId: itemCart._id });
+                    break;
+                }
+            }
+        }
+        return productsArray;
+    }
+    return [];
+};
 
 export default productsReducer;
