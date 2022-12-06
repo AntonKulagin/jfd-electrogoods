@@ -6,7 +6,7 @@ import Button from "../../../../common/Button";
 import { useNavigate } from "react-router-dom";
 import useForm from "../../../../../hooks/useForm";
 import TextField from "../../../../common/forms/TextField";
-import { getAuthSignUpError, signUp } from "../../../../../store/slices/auth";
+import { getAuthError, signUp } from "../../../../../store/slices/auth";
 
 const SignUpForm = () => {
     const dispatch = useDispatch();
@@ -20,14 +20,13 @@ const SignUpForm = () => {
         validatorConfig
     );
 
-    const authError = useSelector(getAuthSignUpError());
+    const authError = useSelector(getAuthError());
 
     const isValid = Object.keys(errors).length === 0;
     const handleSubmit = (e) => {
         e.preventDefault();
         validateBySubmit();
         if (isValid) {
-            // console.log("signUp Form", data);
             dispatch(signUp(data, navigate));
         }
     };

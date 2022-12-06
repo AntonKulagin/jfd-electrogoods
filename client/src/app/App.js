@@ -8,6 +8,7 @@ import MainPage from "./components/pages/mainPage";
 import ProductInfoPage from "./components/pages/productInfoPage/productInfoPage";
 import ProductsPage from "./components/pages/productsPage";
 import UsePage from "./components/pages/userPage/usePage";
+import ProtectedRoute from "./components/protectedRoute";
 import Cart from "./components/ui/cart/cart";
 import Footer from "./components/ui/footer";
 import Header from "./components/ui/header";
@@ -36,7 +37,14 @@ function App() {
                             <Route path="signup" element={<SignUpPage />} />
                         </Route>
                         <Route path="logout" element={<LogOut />} />
-                        <Route path="cart" element={<Cart />} />
+                        <Route
+                            path="cart"
+                            element={
+                                <ProtectedRoute>
+                                    <Cart />
+                                </ProtectedRoute>
+                            }
+                        />
                         <Route path="user" element={<UsePage />} />
                         <Route path="*" element={<Navigate to="" />} />
                     </Routes>

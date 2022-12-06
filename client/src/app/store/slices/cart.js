@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import cartService from "../../services/cart.service";
-import { nanoid } from "nanoid";
+// import { nanoid } from "nanoid";
 
 const initialState = {
     entities: [],
@@ -60,12 +60,14 @@ export const loadCartList = (userId) => async (dispatch) => {
     }
 };
 
-export const addProduct = (data) => async (dispatch) => {
+export const addProduct = (productId, navigate) => async (dispatch) => {
     dispatch(cartRequested());
     try {
-        const { content } = await cartService.add({ _id: nanoid(), ...data });
+        const { content } = await cartService.add(productId);
         dispatch(cartAddReceived(content));
     } catch (error) {
+        const { status } = error?.response;
+        if (status === 401) navigate("/login");
         dispatch(cartRequestFailed(error.message));
     }
 };
@@ -73,8 +75,8 @@ export const addProduct = (data) => async (dispatch) => {
 export const removeProduct = (cartId) => async (dispatch) => {
     dispatch(cartRequested());
     try {
-        const content = await cartService.remove(cartId);
-        if (content === null) {
+        const { content } = await cartService.remove(cartId);
+        if (!content) {
             dispatch(cartRemoved(cartId));
         }
     } catch (error) {

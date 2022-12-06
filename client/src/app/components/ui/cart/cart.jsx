@@ -50,7 +50,9 @@ const Cart = () => {
                     <div className={styles.cart__sum}>
                         Общая сумма заказа: <span>{allPrice} руб.</span>
                     </div>
-                    <Button onClick={handleModal}>Заказать</Button>
+                    <div className={styles.cart__buttonOrder}>
+                        <Button onClick={handleModal}>Заказать</Button>
+                    </div>
                 </div>
                 <Modal active={modalActive} onModal={handleModal}>
                     <div className={styles.cart__modal_sory}>Извините!!!</div>

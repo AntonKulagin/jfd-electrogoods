@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Container from "../../common/container/container";
 import styles from "./productsPage.module.scss";
 import TextField from "../../common/forms/TextField/TextField";
@@ -8,22 +8,27 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../../../store/slices/products";
 import Button from "../../common/Button/Button";
 import { addProduct } from "../../../store/slices/cart";
-import { getCurrenrUserId } from "../../../store/slices/auth";
 import Sidebar from "../../ui/sidebar/sidebar";
 import SelectField from "../../common/forms/selectField/selectField";
 import _ from "lodash";
+import {
+    getTypeFilterMain,
+    setTypeFilterMain
+} from "../../../store/slices/main";
 
 const ProductsPage = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const goods = useSelector(getAllProducts());
-    const currentUserId = useSelector(getCurrenrUserId());
+
+    const typeFilterFromMain = useSelector(getTypeFilterMain());
 
     const sortList = {
         price: { name: "price", label: "Сортировано по цене" },
         nameProduct: { name: "name", label: "Сортировано по названию" }
     };
 
-    const [typeFilter, setTypeFilter] = useState(null);
+    const [typeFilter, setTypeFilter] = useState(typeFilterFromMain);
     const [search, setSearch] = useState({ name: "", value: "" });
     const [sort, setSort] = useState({ path: "name", order: "asc" });
 
@@ -34,8 +39,10 @@ const ProductsPage = () => {
     const handleSidebar = (e) => {
         if (e.target.name === "allgoods") {
             setTypeFilter(null);
+            dispatch(setTypeFilterMain(null));
         } else {
             setTypeFilter(e.target.name);
+            dispatch(setTypeFilterMain(e.target.name));
         }
     };
 
@@ -58,7 +65,7 @@ const ProductsPage = () => {
     const filteredProduct = _.orderBy(searchedGoods, [sort.path], [sort.order]);
 
     const handleClick = (productId) => {
-        dispatch(addProduct({ productId, currentUserId }));
+        dispatch(addProduct(productId, navigate));
     };
 
     return (

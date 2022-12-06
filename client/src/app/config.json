@@ -1,4 +1,4 @@
 {
-    "defaultsUrl": "https://electrogoods-b629b-default-rtdb.europe-west1.firebasedatabase.app/",
-    "isFireBase": true
+	"apiEndpoint": "http://localhost:8080/api",
+	"isFireBase": false
 }

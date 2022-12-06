@@ -13,7 +13,6 @@ const AppLoader = ({ children }) => {
     const dispatch = useDispatch();
     const productsStatusLoading = useSelector(getProductsLoading());
     const isLoggedIn = useSelector(getIsLoggedIn());
-    //  const isCartLoading = useSelector(getCartLoading());
     const currentUserId = useSelector(getCurrenrUserId());
 
     useEffect(() => {

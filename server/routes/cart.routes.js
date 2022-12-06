@@ -17,7 +17,6 @@ router.get("/", auth, async (req, res) => {
 router.post("/:productId", auth, async (req, res) => {
     try {
         const { productId } = req.params;
-
         const addedProduct = await Cart.create({
             productId,
             userId: req.user._id,
@@ -31,14 +30,13 @@ router.post("/:productId", auth, async (req, res) => {
     }
 });
 
-router.delete("/:productId", auth, async (req, res) => {
+router.delete("/:cartId", auth, async (req, res) => {
     try {
-        const { productId } = req.params;
+        const { cartId } = req.params;
+        const removedCart = await Cart.findById(cartId);
 
-        const removedProduct = await Cart.findById(productId);
-
-        if (removedProduct.userId.toString() === req.user._id) {
-            await removedProduct.remove();
+        if (removedCart.userId.toString() === req.user._id) {
+            await removedCart.remove();
             return res.send(null);
         } else {
             return res.status(401).json({ message: "Unauthorized" });

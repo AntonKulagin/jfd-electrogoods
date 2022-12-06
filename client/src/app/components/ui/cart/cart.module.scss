@@ -18,9 +18,11 @@
 		grid-template-rows: auto;
 	}
 	&__order {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
+		@media (min-width: 599.98px) {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
 	}
 	&__sum {
 		font-size: 25px;
@@ -28,10 +30,17 @@
 		span {
 			font-size: 30px;
 		}
+		@media (max-width: 599.98px) {
+			margin-bottom: 20px;
+		}
 	}
 
 	&__buttonOrder {
-		background-color: #fff;
+		@media (max-width: 599.98px) {
+			[class*="button"] {
+				width: 100%;
+			}
+		}
 	}
 	&__modal {
 		&_sory {

@@ -3,30 +3,48 @@ import configFile from "../config.json";
 import localStorageService from "./localStorage.service";
 import authService from "./auth.service";
 
-axios.defaults.baseURL = configFile.defaultsUrl;
+const http = axios.create({
+    baseURL: configFile.apiEndpoint
+});
 
-axios.interceptors.request.use(
+http.interceptors.request.use(
     async function (request) {
+        const expiresDate = localStorageService.getJwtExpires();
+        const refreshToken = localStorageService.getRefreshToken();
+        const isExpired = refreshToken && Date.now() > expiresDate;
+
         if (configFile.isFireBase) {
             const containSlash = /\/$/g.test(request.url);
             request.url =
                 (containSlash ? request.url.slice(0, -1) : request.url) +
                 ".json";
-            const expiresDate = localStorageService.getJwtExpires();
-            const refreshToken = localStorageService.getRefreshToken();
-            if (refreshToken && Date.now() > expiresDate) {
+
+            if (isExpired) {
                 const data = await authService.refresh();
 
                 localStorageService.setTokens({
                     refreshToken: data.refresh_token,
                     idToken: data.id_token,
                     expiresIn: data.expires_in,
-                    localId: data.user_id
+                    userId: data.user_id
                 });
             }
             const accessToken = localStorageService.getAccessToken();
             if (accessToken) {
                 request.params = { ...request.params, auth: accessToken };
+            }
+        } else {
+            if (isExpired) {
+                const data = await authService.refresh();
+
+                localStorageService.setTokens(data);
+            }
+            const accessToken = localStorageService.getAccessToken();
+            if (accessToken) {
+                request.headers = {
+                    ...request.headers,
+                    Authorization: `Bearer ${accessToken}`
+                };
             }
         }
         return request;
@@ -44,13 +62,13 @@ function transformData(data) {
         : data;
 }
 
-axios.interceptors.response.use(
+http.interceptors.response.use(
     function (response) {
-        if (response.data === null) return response;
-        if (typeof response === "object") {
+        if (configFile.isFireBase) {
             response.data = { content: transformData(response.data) };
             return response;
         }
+        response.data = { content: response.data };
         return response;
     },
     function (error) {
@@ -59,10 +77,10 @@ axios.interceptors.response.use(
 );
 
 const httpService = {
-    post: axios.post,
-    get: axios.get,
-    put: axios.put,
-    delete: axios.delete
+    post: http.post,
+    get: http.get,
+    put: http.put,
+    delete: http.delete
 };
 
 export default httpService;

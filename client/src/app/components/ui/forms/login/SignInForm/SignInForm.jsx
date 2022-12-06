@@ -3,7 +3,7 @@ import useForm from "../../../../../hooks/useForm";
 import styles from "../styles/login-form.module.scss";
 import { validatorConfig } from "./validatorConfig";
 import { useDispatch, useSelector } from "react-redux";
-import { getAuthSignInError, signIn } from "../../../../../store/slices/auth";
+import { getAuthError, signIn } from "../../../../../store/slices/auth";
 import { useNavigate } from "react-router-dom";
 import TextField from "../../../../common/forms/TextField";
 import Button from "../../../../common/Button";
@@ -19,14 +19,13 @@ const SignInForm = () => {
         validatorConfig
     );
 
-    const authError = useSelector(getAuthSignInError());
+    const authError = useSelector(getAuthError());
 
     const isValid = Object.keys(errors).length === 0;
     const handleSubmit = (e) => {
         e.preventDefault();
         validateBySubmit();
         if (isValid) {
-            // console.log("sign in form", data);
             dispatch(signIn(data, navigate));
         }
     };

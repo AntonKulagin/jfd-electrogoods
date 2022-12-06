@@ -1,3 +1,68 @@
 .main {
-    background-color: rgb(255, 216, 172);
+	color: #000;
+	&__body {
+		position: relative;
+		z-index: 10;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 20px;
+		padding: 20px 0px;
+		@media (max-width: 995.98px) {
+			gap: 10px;
+		}
+		@media (max-width: 659.98px) {
+			grid-template-columns: repeat(2, 1fr);
+		}
+		@media (max-width: 399.98px) {
+			grid-template-columns: 1fr;
+		}
+	}
+	&__card {
+		backdrop-filter: blur(8px);
+		background-color: rgba(255, 255, 255, 0.1);
+		text-align: center;
+		padding: 20px;
+		border-radius: 10px;
+		overflow: hidden;
+		cursor: pointer;
+		transition: all 0.3s ease 0s;
+		@media (any-hover: hover) {
+			&:hover {
+				background-color: rgba(255, 255, 255, 0.3);
+				img {
+					-webkit-filter: grayscale(0);
+					filter: grayscale(0);
+				}
+			}
+		}
+		@media (max-width: 995.98px) {
+			padding: 10px;
+		}
+	}
+	&__item {
+	}
+	&__title {
+		margin-bottom: 10px;
+		font-size: 25px;
+		font-weight: 600;
+		letter-spacing: 2px;
+		@media (max-width: 995.98px) {
+			font-size: 20px;
+		}
+	}
+	&__image {
+		position: relative;
+		padding-bottom: 70%;
+		border-radius: 5px;
+		overflow: hidden;
+		img {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			object-fit: cover;
+			transition: all 0.3s ease 0s;
+		}
+	}
 }

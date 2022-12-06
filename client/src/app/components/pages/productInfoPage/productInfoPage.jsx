@@ -1,23 +1,22 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getProductById } from "../../../store/slices/products";
 import Button from "../../common/Button/Button";
 import Container from "../../common/container/container";
 import styles from "./productInfoPage.module.scss";
 import icon from "../../../assets/icons/new.png";
-import { getCurrenrUserId } from "../../../store/slices/auth";
 import { addProduct } from "../../../store/slices/cart";
 
 const ProductInfoPage = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { productId } = useParams();
-    const currentUserId = useSelector(getCurrenrUserId());
 
     const product = useSelector(getProductById(productId));
 
     const handleClick = (productId) => {
-        dispatch(addProduct({ productId, currentUserId }));
+        dispatch(addProduct(productId, navigate));
     };
 
     return (

@@ -5,17 +5,14 @@ const cartEndPoint = "cart/";
 const cartService = {
     get: async (userId) => {
         const params = {
-            orderBy: '"currentUserId"',
-            equalTo: `"${userId}"`
+            orderBy: "currentUserId",
+            equalTo: `${userId}`
         };
         const { data } = await httpService.get(cartEndPoint, { params });
         return data;
     },
-    add: async (payload) => {
-        const { data } = await httpService.put(
-            cartEndPoint + payload._id,
-            payload
-        );
+    add: async (productId) => {
+        const { data } = await httpService.post(cartEndPoint + productId);
         return data;
     },
     remove: async (cartId) => {

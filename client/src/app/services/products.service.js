@@ -1,6 +1,6 @@
 import httpService from "./http.service";
 
-const productsEndPoint = "products/";
+const productsEndPoint = "/product/";
 
 const productsService = {
     fetchAll: async () => {
