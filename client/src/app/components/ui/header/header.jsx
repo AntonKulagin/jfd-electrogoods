@@ -51,12 +51,19 @@ const Header = () => {
                         >
                             <nav className={styles.menu}>
                                 <ul>
-                                    <li>
+                                    <li className={styles.menu__link}>
                                         <Link to="/">Главная</Link>
                                     </li>
-                                    <li>
+                                    <li className={styles.menu__link}>
                                         <Link to="/goods">Товары</Link>
                                     </li>
+                                    {currentUser && currentUser.isAdmin && (
+                                        <li className={styles.menu__link_admin}>
+                                            <Link to="/admin">
+                                                Администратор
+                                            </Link>
+                                        </li>
+                                    )}
                                 </ul>
                             </nav>
                         </div>
@@ -66,16 +73,22 @@ const Header = () => {
                             className={styles.header__items}
                         >
                             <ul className={styles.itemsList}>
-                                {!currentUserLoading && loggedIn && (
-                                    <li className={styles.itemsList__userIcon}>
-                                        <Link to="/user">
-                                            <img
-                                                src={currentUser.image}
-                                                alt="userIcon"
-                                            />
-                                        </Link>
-                                    </li>
-                                )}
+                                {currentUser &&
+                                    !currentUserLoading &&
+                                    loggedIn && (
+                                        <li
+                                            className={
+                                                styles.itemsList__userIcon
+                                            }
+                                        >
+                                            <Link to="/user">
+                                                <img
+                                                    src={currentUser.image}
+                                                    alt="userIcon"
+                                                />
+                                            </Link>
+                                        </li>
+                                    )}
                                 <li className={styles.itemsList__cart}>
                                     <Link to="/cart">
                                         <img src={cartIcon} alt="cart" />

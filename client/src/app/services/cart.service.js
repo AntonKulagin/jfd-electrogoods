@@ -1,6 +1,6 @@
 import httpService from "./http.service";
 
-const cartEndPoint = "cart/";
+const cartEndPoint = "/cart/";
 
 const cartService = {
     get: async (userId) => {

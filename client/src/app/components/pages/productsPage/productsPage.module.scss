@@ -32,7 +32,12 @@
 	}
 	&__products {
 	}
+	&__pagination {
+		display: flex;
+		justify-content: center;
+	}
 	&__content {
+		margin-bottom: 15px;
 	}
 	&__cards {
 		display: grid;

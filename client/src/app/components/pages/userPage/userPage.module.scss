@@ -9,6 +9,8 @@
 	&__image {
 	}
 	&__content {
+		display: flex;
+		flex-direction: column;
 	}
 	&__name {
 		font-size: 30px;
@@ -19,10 +21,42 @@
 	&__email {
 		font-size: 25px;
 		letter-spacing: 2px;
+		flex: 1 1 auto;
+	}
+	&__buttons {
+		display: flex;
+		gap: 15px;
+		justify-content: flex-end;
 	}
 	&__edit {
 		position: absolute;
+		width: 30px;
+		height: 30px;
 		top: 0;
 		right: 0;
+		@media (any-hover: hover) {
+			&:hover {
+				animation: editIcon linear 3s infinite;
+			}
+		}
+	}
+}
+
+.textField {
+	&__name,
+	&__email {
+		font-size: 20px;
+		border: 1px solid #ccc;
+		width: 50%;
+		opacity: 0.3;
+	}
+}
+
+@keyframes editIcon {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
 	}
 }

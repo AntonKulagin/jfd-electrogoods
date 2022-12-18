@@ -21,18 +21,37 @@ const productsSlice = createSlice({
         received(state, action) {
             state.entities = action.payload;
             state.isLoading = false;
+        },
+        productUpdated(state, action) {
+            state.entities = [
+                ...state.entities.filter(
+                    (prod) => prod._id !== action.payload._id
+                ),
+                action.payload
+            ];
+            state.isLoading = false;
         }
     }
 });
 
 const { reducer: productsReducer, actions } = productsSlice;
-const { requested, requestFailed, received } = actions;
+const { requested, requestFailed, received, productUpdated } = actions;
 
 export const loadProductsList = () => async (dispatch) => {
     dispatch(requested());
     try {
         const { content } = await productsService.fetchAll();
         dispatch(received(content));
+    } catch (error) {
+        dispatch(requestFailed(error.message));
+    }
+};
+
+export const updateProduct = (data) => async (dispatch) => {
+    dispatch(requested());
+    try {
+        const { content } = await productsService.update(data);
+        dispatch(productUpdated(content));
     } catch (error) {
         dispatch(requestFailed(error.message));
     }

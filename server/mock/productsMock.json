@@ -2,71 +2,149 @@
 	{
 		"name": "ПК DEXP Atlas H341",
 		"image": "https://img.tehnomaks.ru/img/prod/full/16058521942.jpg",
-		"processor": "Intel Celeron N4020, 2x1.1 ГГц",
+		"info": "Intel Celeron N4020, 2x1.1 ГГц",
 		"price": 10000,
-		"type": "computer"
+		"oldPrice": 15000,
+		"type": "computer",
+		"new": true
 	},
 	{
 		"name": "ПК DEXP Aquilon O272",
 		"image": "https://express-china.ru/upload/iblock/420/4200b9e40b2206fa1e8546a7fb2871c1.jpg",
-		"processor": "Intel Celeron N4120, 4x1.1 ГГц",
+		"info": "Intel Celeron N4120, 4x1.1 ГГц",
 		"price": 11800,
-		"type": "computer"
+		"oldPrice": 15999,
+		"type": "computer",
+		"new": true
 	},
 	{
 		"name": "ПК Acer Aspire XC-830 [DT.BE8ER.003]",
 		"image": "https://ilab24.ru/img/service-pc.png",
-		"processor": "Intel Celeron J4025, 2x2 ГГц",
+		"info": "Intel Celeron J4025, 2x2 ГГц",
 		"price": 22300,
+		"oldPrice": 35999,
 		"type": "computer"
 	},
 	{
 		"name": "ПК Acer Veriton S2680G [DT.VV2ER.007]",
 		"image": "https://shkola5malgobek-r26.gosweb.gosuslugi.ru/netcat_files/56/746/equipment.webp",
-		"processor": "Intel Pentium Gold G6405, 2x4.1 ГГц",
+		"info": "Intel Pentium Gold G6405, 2x4.1 ГГц",
 		"price": 26999,
+		"oldPrice": 50499,
 		"type": "computer"
 	},
 	{
 		"name": "ПК MSI PRO DP21 11MA-210RU [9S6-B0A411-210]",
 		"image": "https://avatars.dzeninfra.ru/get-zen_doc/1875939/pub_5d0ba322b34feb00af5ddb26_5d0baae62d23ae00af68c06b/scale_1200",
-		"processor": "Intel Pentium Gold G6405, 2x4.1 ГГц",
+		"info": "Intel Pentium Gold G6405, 2x4.1 ГГц",
 		"price": 26999,
+		"oldPrice": 56999,
 		"type": "computer"
 	},
 	{
 		"name": "17.3\" Ноутбук MSI GF76 Katana 11UE-269XRU черный",
 		"image": "https://idedal.ru/images/notebook.png",
-		"processor": "Intel Core i7-11800H",
+		"info": "Intel Core i7-11800H",
 		"price": 94799,
-		"type": "laptop"
+		"oldPrice": 150299,
+		"type": "laptop",
+		"new": true
 	},
 	{
 		"name": "17.3\" Ноутбук MSI GF76 Katana 11SC-483XRU черный [Full HD (1920x1080)",
 		"image": "https://static.tildacdn.com/tild6233-3937-4239-a638-393236393933/laptope_004_2.png",
-		"processor": "Intel Core i5-11400H",
+		"info": "Intel Core i5-11400H",
 		"price": 63499,
-		"type": "laptop"
+		"oldPrice": 120399,
+		"type": "laptop",
+		"new": true
 	},
 	{
 		"name": "15.6\" Ноутбук GIGABYTE G5 GE черный [Full HD (1920x1080)",
 		"image": "https://img2.freepng.ru/20180330/keq/kisspng-laptop-dell-asus-computer-monitors-central-process-laptops-5abe545cad7ef0.2756689015224228767107.jpg",
-		"processor": "Intel Core i5-12500H",
+		"info": "Intel Core i5-12500H",
 		"price": 67199,
+		"oldPrice": 115999,
 		"type": "laptop"
 	},
 	{
 		"name": "15.6\" Ноутбук MSI GF66 Katana 12UE-868XRU черный [Full HD (1920x1080)",
 		"image": "https://www.freeiconspng.com/uploads/laptop-icon-19.jpg",
-		"processor": "Intel Core i5-12500H",
+		"info": "Intel Core i5-12500H",
 		"price": 87399,
+		"oldPrice": 170899,
 		"type": "laptop"
 	},
 	{
 		"name": "17.3\" Ноутбук MSI GF76 Katana 12UD-237XRU черный [Full HD (1920x1080)",
 		"image": "https://www.xbook.ru/upload/resize_cache/iblock/d70/1200_1200_140cd750bba9870f18aada2478b24840a/1a1g.jpg",
-		"processor": "Intel Core i5-12500H",
+		"info": "Intel Core i5-12500H",
 		"price": 82799,
+		"oldPrice": 190499,
 		"type": "laptop"
+	},
+	{
+		"name": "Холодильник двухкамерный Hyundai CC4553F Total No Frost, черная сталь",
+		"image": "data:image/jpeg;base64,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",
+		"info": "общий объем 468 л; холодильной камеры 347 л; морозильной камеры 121 л",
+		"price": 59900,
+		"oldPrice": 100499,
+		"type": "fridge"
+	},
+	{
+		"name": "Холодильник двухкамерный KRAFT TNC-NF503D Total No Frost, черная сталь",
+		"image": "https://www.schaublorenz-shop.ru/UserFiles/Image/holodilnik/img79_22095_big.jpg",
+		"info": "60 х 193.5 х 67 см",
+		"price": 54900,
+		"oldPrice": 95499,
+		"type": "fridge"
+	},
+	{
+		"name": "Холодильник двухкамерный LEX RFS 204 NF BL Total No Frost, черный",
+		"image": "https://static.insales-cdn.com/images/products/1/7622/326794694/1_34004287_15_05_L_CCRN_6180_W.jpg",
+		"info": "59.5 х 200.3 х 63.2 см",
+		"price": 79400,
+		"oldPrice": 130299,
+		"type": "fridge"
+	},
+	{
+		"name": "Холодильник двухкамерный KRAFT TNC-NF401W Total No Frost, белый",
+		"image": "https://www.lg.com/ru/images/refrigerators/md05843209/gallery/medium15.jpg",
+		"info": "60 х 184 х 66.5 см",
+		"price": 49490,
+		"oldPrice": 90499,
+		"type": "fridge"
+	},
+	{
+		"name": "Пылесос Bosch BWD421PRO",
+		"image": "https://c.dns-shop.ru/thumb/st4/fit/500/500/d769480107aaae4b3c89ace9b5af569a/b578158995184d80a6db002562fb99b7f4ff03127a39bbe33ab8e1fc84b1860f.jpg.webp",
+		"info": "функция сбора жидкостей, автоматическое сматывание шнура",
+		"price": 25990,
+		"oldPrice": 50990,
+		"type": "vacuum"
+	},
+	{
+		"name": "Пылесос Thomas Nero Aqua Stealth, синий/серый",
+		"image": "https://c.dns-shop.ru/thumb/st4/fit/320/250/86e6e8cc5ee8fc742b71e16de1dafcd8/426ffd86ee09258386049e4868b2d34520f2c5226d5716319f8037aa2410c67d.jpg",
+		"info": "31.80x30.60x48.60 см",
+		"price": 21990,
+		"oldPrice": 49390,
+		"type": "vacuum"
+	},
+	{
+		"name": "Пылесос DEXP V-2200VC серый",
+		"image": "https://c.dns-shop.ru/thumb/st4/fit/320/250/6825288652c957909cefadf09a9870bb/f7975e364440f4ee301d297a3c22ba18dc19d0338ad46c43b1abbbae24c4de32.jpg",
+		"info": "31.80x30.60x48.60 см",
+		"price": 5199,
+		"oldPrice": 9400,
+		"type": "vacuum"
+	},
+	{
+		"name": "Пылесос DEXP V-2200VC серый",
+		"image": "https://c.dns-shop.ru/thumb/st4/fit/320/250/6825288652c957909cefadf09a9870bb/f7975e364440f4ee301d297a3c22ba18dc19d0338ad46c43b1abbbae24c4de32.jpg",
+		"info": "31.80x30.60x48.60 см",
+		"price": 5199,
+		"oldPrice": 9400,
+		"type": "vacuum"
 	}
 ]

@@ -1,0 +1,27 @@
+%item {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 10px;
+	border: 1px solid #ccc;
+	transition: all 0.3s ease 0s;
+	cursor: pointer;
+	@media (any-hover: hover) {
+		&:hover {
+			background-color: #ddd;
+		}
+	}
+}
+
+.pagination {
+	display: flex;
+	&__item {
+		@extend %item;
+		&_active {
+			@extend %item;
+			font-weight: 700;
+			background-color: rgb(176, 210, 255);
+			color: blue;
+		}
+	}
+}

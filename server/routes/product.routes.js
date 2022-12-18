@@ -26,4 +26,16 @@ router.get("/:productId", async (req, res) => {
     }
 });
 
+router.patch("/:productId", async (req, res) => {
+    try {
+        const { productId } = req.params;
+        const updatedProduct = await Product.findByIdAndUpdate(productId, req.body, { new: true });
+        res.send(updatedProduct);
+    } catch (e) {
+        res.status(500).json({
+            message: "На сервере произошла ошибка, попробуйте позже",
+        });
+    }
+});
+
 module.exports = router;

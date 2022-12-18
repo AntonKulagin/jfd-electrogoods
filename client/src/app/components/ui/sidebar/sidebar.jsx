@@ -2,11 +2,20 @@ import React from "react";
 import styles from "./sidebar.module.scss";
 import PropTypes from "prop-types";
 
-const Sidebar = ({ onChoose }) => {
+const Sidebar = ({ onChoose, active }) => {
     const sidebar = {
         computer: { name: "computer", label: "Компьютеры" },
         laptop: { name: "laptop", label: "Ноутбуки" },
+        fridge: { name: "fridge", label: "Холодильники" },
+        vacuum: { name: "vacuum", label: "Пылесосы" },
         allgoods: { name: "allgoods", label: "Все товары" }
+    };
+
+    const getClassButton = (name) => {
+        if (name === active) {
+            return styles.sidebar__button_active;
+        }
+        return styles.sidebar__button;
     };
 
     return (
@@ -18,7 +27,7 @@ const Sidebar = ({ onChoose }) => {
                             <button
                                 name={sidebar[item].name}
                                 onClick={(e) => onChoose(e)}
-                                className={styles.sidebar__button_comp}
+                                className={getClassButton(sidebar[item].name)}
                             >
                                 {sidebar[item].label}
                             </button>
@@ -30,7 +39,8 @@ const Sidebar = ({ onChoose }) => {
     );
 };
 Sidebar.propTypes = {
-    onChoose: PropTypes.func
+    onChoose: PropTypes.func,
+    active: PropTypes.string
 };
 
 export default Sidebar;

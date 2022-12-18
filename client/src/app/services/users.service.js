@@ -1,7 +1,7 @@
 import httpService from "./http.service";
 import localStorageService from "./localStorage.service";
 
-const userEndpoint = "user/";
+const userEndpoint = "/user/";
 
 const usersService = {
     get: async () => {
@@ -28,5 +28,12 @@ const usersService = {
         );
         return data;
     }
+    //  updateAdmin: async (payload) => {
+    //      const { data } = await httpService.patch(
+    //          userEndpoint + payload._id,
+    //          payload
+    //      );
+    //      return data;
+    //  }
 };
 export default usersService;

@@ -16,21 +16,19 @@
 		}
 	}
 	&__button {
-		&_comp {
-			font-weight: 600;
-			@media (any-hover: hover) {
-				&:hover {
-					text-decoration: underline;
-				}
-			}
+		@extend %templateButton;
+		&_active {
+			@extend %templateButton;
+			color: #3b37fe;
 		}
-		&_lap {
-			font-weight: 600;
-			@media (any-hover: hover) {
-				&:hover {
-					text-decoration: underline;
-				}
-			}
+	}
+}
+
+%templateButton {
+	font-weight: 600;
+	@media (any-hover: hover) {
+		&:hover {
+			text-decoration: underline;
 		}
 	}
 }

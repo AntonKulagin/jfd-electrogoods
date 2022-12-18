@@ -1,2 +1,2 @@
-import UsePage from "./usePage";
-export default UsePage;
+import UserPage from "./userPage";
+export default UserPage;

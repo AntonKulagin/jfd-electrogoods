@@ -12,7 +12,10 @@ const initialState = localStorageService.getAccessToken()
           userId: localStorageService.getUserId(),
           isLoggedIn: true,
           authError: null,
-          isLoading: true
+          isLoading: true,
+          currentDataLoaded: false,
+          allUsersIsLoading: true,
+          isAdmin: true
       }
     : {
           entities: null,
@@ -20,7 +23,10 @@ const initialState = localStorageService.getAccessToken()
           userId: null,
           isLoggedIn: false,
           authError: null,
-          isLoading: true
+          isLoading: true,
+          currentDataLoaded: false,
+          allUsersIsLoading: true,
+          isAdmin: false
       };
 
 const authSlice = createSlice({
@@ -40,20 +46,60 @@ const authSlice = createSlice({
             state.isLoading = false;
         },
 
+        usersRequested(state) {
+            state.allUsersIsLoading = true;
+        },
+        usersReceivedSuccess(state, action) {
+            state.entities = action.payload;
+            state.allUsersIsLoading = false;
+        },
+        usersRequestFailed(state, action) {
+            state.error = action.payload;
+            state.allUsersIsLoading = false;
+        },
+
         currentUserRequested(state) {
             state.isLoading = true;
+            state.currentDataLoaded = false;
         },
         currentUserReceivedSuccess(state, action) {
             state.currentUser = action.payload;
+            state.isAdmin = action.payload.isAdmin;
             state.isLoading = false;
+            state.currentDataLoaded = true;
         },
-        currentUserRequestFailed(state) {
+        currentUserRequestFailed(state, action) {
+            state.authError = action.payload;
             state.isLoading = false;
+            state.currentDataLoaded = false;
+        },
+
+        updateRequested(state) {
+            state.currentDataLoaded = false;
+        },
+        updateReceived(state, action) {
+            state.currentUser = action.payload;
+            state.currentDataLoaded = true;
+        },
+        updateRequestFailed(state, action) {
+            state.authError = action.payload;
+            state.currentDataLoaded = false;
         },
 
         userLoggedOut(state) {
-            state.isLoggedIn = false;
             state.userId = null;
+            state.currentUser = null;
+            state.isLoggedIn = false;
+        },
+
+        updateAdminReseived(state, action) {
+            state.entities = [
+                ...state.entities.filter(
+                    (user) => user._id !== action.payload._id
+                ),
+                action.payload
+            ];
+            state.currentDataLoaded = true;
         }
     }
 });
@@ -64,11 +110,21 @@ const {
     authReceivedSuccess,
     authRequestFailed,
 
+    usersRequested,
+    usersReceivedSuccess,
+    usersRequestFailed,
+
     currentUserRequested,
     currentUserReceivedSuccess,
     currentUserRequestFailed,
 
-    userLoggedOut
+    updateRequested,
+    updateReceived,
+    updateRequestFailed,
+
+    userLoggedOut,
+
+    updateAdminReseived
 } = actions;
 
 export const loadCurrentUser = () => async (dispatch) => {
@@ -81,13 +137,22 @@ export const loadCurrentUser = () => async (dispatch) => {
     }
 };
 
+export const loadAllUsers = () => async (dispatch) => {
+    dispatch(usersRequested());
+    try {
+        const { content } = await usersService.get();
+        dispatch(usersReceivedSuccess(content));
+    } catch (error) {
+        dispatch(usersRequestFailed(error.message));
+    }
+};
+
 export const signUp = (data, redirect) => async (dispatch) => {
     dispatch(authRequested());
     try {
         const content = await authService.register(data);
         localStorageService.setTokens(content);
         dispatch(authReceivedSuccess(content.userId));
-        dispatch(loadCurrentUser());
         redirect("/", { replace: true });
     } catch (error) {
         dispatch(authRequestFailed(errorCatcher(error)));
@@ -98,12 +163,32 @@ export const signIn = (data, redirect) => async (dispatch) => {
     dispatch(authRequested());
     try {
         const content = await authService.login(data);
+        localStorageService.removeUserData();
         localStorageService.setTokens(content);
         dispatch(authReceivedSuccess(content.userId));
-        dispatch(loadCurrentUser());
         redirect("/", { replace: true });
     } catch (error) {
         dispatch(authRequestFailed(errorCatcher(error)));
+    }
+};
+
+export const updateUser = (data) => async (dispatch) => {
+    dispatch(updateRequested());
+    try {
+        const { content } = await usersService.update(data);
+        dispatch(updateReceived(content));
+    } catch (error) {
+        dispatch(updateRequestFailed(errorCatcher(error)));
+    }
+};
+
+export const updateUserAdmin = (data) => async (dispatch) => {
+    dispatch(updateRequested());
+    try {
+        const { content } = await usersService.update(data);
+        dispatch(updateAdminReseived(content));
+    } catch (error) {
+        dispatch(updateRequestFailed(errorCatcher(error)));
     }
 };
 
@@ -125,8 +210,12 @@ const errorCatcher = (error) => {
     return errorMessage;
 };
 
+export const getIsAdmin = () => (state) => state.auth.isAdmin;
+export const getAllUsers = () => (state) => state.auth.entities;
+
 export const getCurrenrUserId = () => (state) => state.auth.userId;
 export const getCurrentUserData = () => (state) => state.auth.currentUser;
+export const getDataStatus = () => (state) => state.auth.currentDataLoaded;
 
 export const getAuthError = () => (state) => state.auth.authError;
 export const getIsLoading = () => (state) => state.auth.isLoading;

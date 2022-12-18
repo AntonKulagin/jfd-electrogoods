@@ -9,8 +9,9 @@ export const setTokens = ({
     userId,
     refreshToken
 }) => {
+    const expiresDate = new Date().getTime() + expiresIn * 1000;
     localStorage.setItem(JWT_TOKEN_KEY, accessToken);
-    localStorage.setItem(JWT_EXPIRES_KEY, expiresIn);
+    localStorage.setItem(JWT_EXPIRES_KEY, expiresDate);
     localStorage.setItem(USER_LOCAL_ID, userId);
     localStorage.setItem(JWT_REFRESH_KEY, refreshToken);
 };

@@ -42,15 +42,13 @@ const ProductInfoPage = () => {
                                 {product.info}
                             </div>
                             <div className={styles.content__price}>
-                                <div
-                                    className={
-                                        styles.content__price_currentPrice
-                                    }
-                                >
-                                    {product.price} руб.
+                                <div className={styles.content__price_current}>
+                                    <span>{product.price}</span>
+                                    <span> руб.</span>
                                 </div>
                                 <div className={styles.content__price_oldPrice}>
-                                    {product.oldPrice} руб.
+                                    <span>{product.oldPrice}</span>
+                                    <span> руб.</span>
                                 </div>
                                 <Button
                                     onClick={() => handleClick(product._id)}

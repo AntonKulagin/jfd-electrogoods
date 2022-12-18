@@ -2,10 +2,11 @@
 	background-color: #3b37fe;
 	color: #fff;
 	padding: 10px 20px;
-	border-radius: 10px;
+	border-radius: 5px;
 	position: relative;
 	overflow: hidden;
 	transition: all 0.3s ease 0s;
+	width: 100%;
 	&::before {
 		content: "";
 		position: absolute;

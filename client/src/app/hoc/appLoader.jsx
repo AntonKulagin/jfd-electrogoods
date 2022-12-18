@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductsLoading, loadProductsList } from "../store/slices/products";
@@ -8,6 +8,7 @@ import {
     getIsLoggedIn,
     loadCurrentUser
 } from "../store/slices/auth";
+import Loader from "../components/common/loader/loader";
 
 const AppLoader = ({ children }) => {
     const dispatch = useDispatch();
@@ -18,11 +19,11 @@ const AppLoader = ({ children }) => {
     useEffect(() => {
         dispatch(loadProductsList());
         if (isLoggedIn) {
-            dispatch(loadCartList(currentUserId));
             dispatch(loadCurrentUser());
+            dispatch(loadCartList(currentUserId));
         }
     }, [isLoggedIn]);
-    if (productsStatusLoading) return "Loading...";
+    if (productsStatusLoading) return <Loader />;
     return children;
 };
 

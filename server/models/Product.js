@@ -10,17 +10,21 @@ const schema = new Schema(
             type: String,
             required: true,
         },
-        processor: {
+        info: {
             type: String,
         },
         price: {
             type: Number,
             required: true,
         },
+        oldPrice: {
+            type: Number,
+        },
         type: {
             type: String,
             required: true,
         },
+        new: Boolean,
     },
     {
         timestamps: true,

@@ -4,9 +4,6 @@ import config from "../config.json";
 
 const httpAuth = axios.create({
     baseURL: config.apiEndpoint + "/auth/"
-    //  params: {
-    //      key: "AIzaSyChxW5UtfiCPtytoJKhCJb3O0heYEFKqIk"
-    //  }
 });
 
 const authService = {

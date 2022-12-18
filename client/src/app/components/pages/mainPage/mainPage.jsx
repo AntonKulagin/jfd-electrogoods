@@ -27,7 +27,7 @@ const MainPage = () => {
             name: "allgoods",
             label: "Все товары",
             image: images.allGoodsImage,
-            typeFilter: ""
+            typeFilter: "allgoods"
         }
     };
 

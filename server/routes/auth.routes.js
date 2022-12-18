@@ -119,7 +119,7 @@ router.post("/token", async (req, res) => {
             return res.status(401).json({ message: "Unautharized" });
         }
 
-        const tokens = await tokenService.generate({
+        const tokens = tokenService.generate({
             _id: data._id,
         });
 
