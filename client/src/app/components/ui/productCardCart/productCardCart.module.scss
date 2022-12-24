@@ -44,11 +44,49 @@
 			}
 		}
 		&_info {
+			margin-bottom: 10px;
 			@media (max-width: 767.98px) {
 				font-size: 14px;
 			}
 			@media (max-width: 550.98px) {
 				margin-bottom: 10px;
+			}
+		}
+	}
+	&__amount {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+	}
+	&__amountButton {
+		&_prev {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 25px;
+			height: 25px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			transition: all 0.3s ease 0s;
+			@media (any-hover: hover) {
+				&:hover {
+					background-color: rgb(55, 192, 255);
+				}
+			}
+		}
+		&_next {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 25px;
+			height: 25px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			transition: all 0.3s ease 0s;
+			@media (any-hover: hover) {
+				&:hover {
+					background-color: rgb(55, 192, 255);
+				}
 			}
 		}
 	}

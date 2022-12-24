@@ -36,6 +36,15 @@ const cartSlice = createSlice({
         cartAllDeleted: (state) => {
             state.entities = [];
             state.isLoading = false;
+        },
+        cartUpdateCount: (state, action) => {
+            state.entities = state.entities.map((item) => {
+                if (item.productId === action.payload.productId) {
+                    return { ...item, amount: action.payload.amount };
+                } else {
+                    return item;
+                }
+            });
         }
     }
 });
@@ -47,7 +56,8 @@ const {
     cartReceived,
     cartAddReceived,
     cartRemoved,
-    cartAllDeleted
+    cartAllDeleted,
+    cartUpdateCount
 } = actions;
 
 export const loadCartList = (userId) => async (dispatch) => {
@@ -60,10 +70,10 @@ export const loadCartList = (userId) => async (dispatch) => {
     }
 };
 
-export const addProduct = (productId, navigate) => async (dispatch) => {
+export const addProduct = (payload, navigate) => async (dispatch) => {
     dispatch(cartRequested());
     try {
-        const { content } = await cartService.add(productId);
+        const { content } = await cartService.add(payload);
         dispatch(cartAddReceived(content));
     } catch (error) {
         const { status } = error?.response;
@@ -82,6 +92,10 @@ export const removeProduct = (cartId) => async (dispatch) => {
     } catch (error) {
         dispatch(cartRequestFailed(error.message));
     }
+};
+
+export const cahangeAmountProduct = (data) => (dispatch) => {
+    dispatch(cartUpdateCount(data));
 };
 
 export const cartLogOut = () => (dispatch) => {

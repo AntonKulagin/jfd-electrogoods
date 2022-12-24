@@ -13,6 +13,14 @@ const productsService = {
             payload
         );
         return data;
+    },
+    create: async (payload) => {
+        const { data } = await httpService.post(productsEndPoint, payload);
+        return data;
+    },
+    remove: async (productId) => {
+        const { data } = await httpService.delete(productsEndPoint + productId);
+        return data;
     }
 };
 

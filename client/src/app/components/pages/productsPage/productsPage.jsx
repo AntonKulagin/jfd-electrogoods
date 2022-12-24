@@ -73,7 +73,7 @@ const ProductsPage = () => {
     const productsCount = filteredProduct.length;
 
     const handleClick = (productId) => {
-        dispatch(addProduct(productId, navigate));
+        dispatch(addProduct({ productId, amount: 1 }, navigate));
     };
 
     const handlePageChange = (pageIndex) => {

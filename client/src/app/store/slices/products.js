@@ -30,12 +30,29 @@ const productsSlice = createSlice({
                 action.payload
             ];
             state.isLoading = false;
+        },
+        productCreated(state, action) {
+            state.entities.push(action.payload);
+            state.isLoading = false;
+        },
+        productDeleted(state, action) {
+            state.entities = state.entities.filter(
+                (p) => p._id !== action.payload
+            );
+            state.isLoading = false;
         }
     }
 });
 
 const { reducer: productsReducer, actions } = productsSlice;
-const { requested, requestFailed, received, productUpdated } = actions;
+const {
+    requested,
+    requestFailed,
+    received,
+    productUpdated,
+    productCreated,
+    productDeleted
+} = actions;
 
 export const loadProductsList = () => async (dispatch) => {
     dispatch(requested());
@@ -52,6 +69,28 @@ export const updateProduct = (data) => async (dispatch) => {
     try {
         const { content } = await productsService.update(data);
         dispatch(productUpdated(content));
+    } catch (error) {
+        dispatch(requestFailed(error.message));
+    }
+};
+
+export const createProduct = (data) => async (dispatch) => {
+    dispatch(requested());
+    try {
+        const { content } = await productsService.create(data);
+        dispatch(productCreated(content));
+    } catch (error) {
+        dispatch(requestFailed(error.message));
+    }
+};
+
+export const removeProduct = (productId) => async (dispatch) => {
+    dispatch(requested());
+    try {
+        const { content } = await productsService.remove(productId);
+        if (!content) {
+            dispatch(productDeleted(productId));
+        }
     } catch (error) {
         dispatch(requestFailed(error.message));
     }

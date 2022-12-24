@@ -4,7 +4,11 @@ import editIcon from "../../../assets/icons/edit.svg";
 import TextField from "../../common/forms/TextField";
 import Button from "../../common/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProducts, updateProduct } from "../../../store/slices/products";
+import {
+    getAllProducts,
+    removeProduct,
+    updateProduct
+} from "../../../store/slices/products";
 import styles from "./admin.module.scss";
 
 const AdminProducts = () => {
@@ -36,6 +40,10 @@ const AdminProducts = () => {
     const handleClose = () => {
         setIsEditId(null);
         setEdit(null);
+    };
+
+    const handleDelete = (productId) => {
+        dispatch(removeProduct(productId));
     };
 
     return (
@@ -104,6 +112,12 @@ const AdminProducts = () => {
                         </div>
                         {isEditId === item._id && (
                             <div className={styles.admin__buttons}>
+                                <button
+                                    onClick={() => handleDelete(item._id)}
+                                    className={styles.admin__buttonDelete}
+                                >
+                                    Удалить
+                                </button>
                                 <div className={styles.admin__buttonUpdate}>
                                     <Button onClick={handleUpdate}>
                                         Обновить

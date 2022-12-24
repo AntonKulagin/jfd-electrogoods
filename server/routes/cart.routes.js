@@ -17,8 +17,10 @@ router.get("/", auth, async (req, res) => {
 router.post("/:productId", auth, async (req, res) => {
     try {
         const { productId } = req.params;
+        const { amount } = req.body;
         const addedProduct = await Cart.create({
             productId,
+            amount,
             userId: req.user._id,
         });
 

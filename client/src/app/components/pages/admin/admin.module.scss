@@ -125,6 +125,18 @@
 	}
 	&__buttonUpdate {
 	}
+	&__buttonDelete {
+		background-color: rgb(255, 143, 143);
+		color: #fff;
+		padding: 5px 10px;
+		border-radius: 5px;
+		transition: all 0.3s ease 0s;
+		@media (any-hover: hover) {
+			&:hover {
+				background-color: red;
+			}
+		}
+	}
 }
 @keyframes editIcon {
 	0% {
@@ -178,5 +190,57 @@
 	&__admin {
 		display: flex;
 		gap: 10px;
+	}
+}
+.newProd {
+	&__body {
+		width: 700px;
+		@media (max-width: 900px) {
+			width: 500px;
+		}
+		@media (max-width: 680px) {
+			width: 300px;
+		}
+		@media (max-width: 400px) {
+			width: 280px;
+		}
+	}
+	&__title {
+		text-align: center;
+		margin-bottom: 15px;
+	}
+	&__name {
+		margin-bottom: 15px;
+	}
+	&__image {
+		margin-bottom: 15px;
+	}
+	&__info {
+		margin-bottom: 15px;
+	}
+	&__price {
+		margin-bottom: 15px;
+	}
+	&__oldPrice {
+		margin-bottom: 15px;
+	}
+	&__type {
+		margin-bottom: 10px;
+	}
+	&__typeInfo {
+		font-size: 12px;
+		color: #bbb;
+		margin-bottom: 15px;
+	}
+	&__button {
+		border: 1px solid #000;
+		border-radius: 5px;
+		padding: 5px 10px;
+		transition: all 0.3s ease 0s;
+		@media (any-hover: hover) {
+			&:hover {
+				background-color: rgb(200, 210, 255);
+			}
+		}
 	}
 }

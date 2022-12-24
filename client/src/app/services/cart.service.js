@@ -11,8 +11,11 @@ const cartService = {
         const { data } = await httpService.get(cartEndPoint, { params });
         return data;
     },
-    add: async (productId) => {
-        const { data } = await httpService.post(cartEndPoint + productId);
+    add: async (payload) => {
+        const { data } = await httpService.post(
+            cartEndPoint + payload.productId,
+            payload
+        );
         return data;
     },
     remove: async (cartId) => {

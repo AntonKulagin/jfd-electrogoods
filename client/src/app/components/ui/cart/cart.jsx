@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
+    cahangeAmountProduct,
     getCart
     //  getCartLoading
     //  loadCartList
@@ -12,21 +13,29 @@ import ProductCardCart from "../productCardCart";
 import Button from "../../common/Button";
 import Modal from "../../common/modal/modal";
 
-// import { getCurrenrUserId } from "../../../store/slices/auth";
-
 const Cart = () => {
+    const dispatch = useDispatch();
     const cart = useSelector(getCart());
     const [modalActive, setModalActive] = useState(false);
 
     const productsCartList = useSelector(getProductsList(cart));
 
     const allPrice = productsCartList.reduce(
-        (acc, product) => acc + product.price,
+        (acc, product) => acc + product.price * amountProducts(product._id),
         0
     );
 
     const handleModal = () => {
         setModalActive((prev) => !prev);
+    };
+
+    function amountProducts(prodId) {
+        const product = cart.find((item) => item.productId === prodId);
+        return product.amount;
+    }
+
+    const handleChange = (productId, amount) => {
+        dispatch(cahangeAmountProduct({ productId, amount }));
     };
 
     return (
@@ -38,6 +47,8 @@ const Cart = () => {
                             {productsCartList.map((prod) => (
                                 <ProductCardCart
                                     product={prod}
+                                    amount={amountProducts(prod._id)}
+                                    onChange={handleChange}
                                     key={prod.cartId}
                                 />
                             ))}
